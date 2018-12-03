@@ -3,7 +3,10 @@ for arg in "$@"
 do
 case $arg in
 	-f|--file)
-		cat $2 | curl -s -F c=@- https://ptpb.pw/?u=1;;
+		echo "$(date) 
+$(cat $2)" | curl -s -F c=@- https://ptpb.pw/?u=1;;
+	-i|--image)
+		cat $2 | curl -s -F c=@- https://ptpb.pw/?u=1 | awk '{print $0".png"}';;
 	-s|--screenshot)
 		maim -u -s | curl -s -F c=@- https://ptpb.pw/?u=1 | awk '{print $0".png"}';;
 	-u|--url)
@@ -24,10 +27,12 @@ if [[ $1 = "" ]]; then
 	echo "Written by Jake Marin (jmarin217)"
 	echo "Options include:"
 	echo "	-f or --file : upload a file."
+	echo "	-i or --image : upload an image (only supports png at the moment)."
 	echo "	-s or --screenshot : upload a screenshot."
 	echo "	-u or --url : shorten a url."
 	echo "Syntax:"
 	echo "	pus -f <filename>"
+	echo "	pus -i <pngfile>"
 	echo "	pus -s"
 	echo "	pus -u <url>"
 fi
