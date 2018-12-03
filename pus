@@ -15,9 +15,9 @@ case $arg in
 		echo "	-s or --screenshot : upload a screenshot."
 		echo "	-u or --url : shorten a url."
 		echo "Syntax:"
-		echo "	pussy -f <filename>"
-		echo "	pussy -s"
-		echo "	pussy -u <url>"
+		echo "	pus -f <filename>"
+		echo "	pus -s"
+		echo "	pus -u <url>"
 esac
 done
 if [[ $1 = "" ]]; then
@@ -27,7 +27,7 @@ if [[ $1 = "" ]]; then
 	echo "	-s or --screenshot : upload a screenshot."
 	echo "	-u or --url : shorten a url."
 	echo "Syntax:"
-	echo "	pussy -f <filename>"
-	echo "	pussy -s"
-	echo "	pussy -u <url>"
+	echo "	pus -f <filename>"
+	echo "	pus -s"
+	echo "	pus -u <url>"
 fi
