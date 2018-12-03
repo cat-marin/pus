@@ -4,6 +4,7 @@ PUS can upload files, take screenshots and upload them, and shorten URLs.
 # Dependancies
 - curl
 - maim
+- bash
 # Installation
 - ```chmod +x ./pus```
 - ```sudo cp ./pus /bin```
