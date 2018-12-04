@@ -1,0 +1,50 @@
+#!/bin/bash
+fext=$(file --extension $2 | cut -d : -f 2 | cut -d / -f -2)
+for arg in "$@"
+do
+case $arg in
+	-fv|--file-verbose)
+		echo "$(date)
+$(cat $2)" | curl -s -F c=@- https://ptpb.pw/;;
+	-f|--file)
+		echo "$(date) 
+$(cat $2)" | curl -s -F c=@- https://ptpb.pw/?u=1;;
+	-iv|--image-loginfo)
+		cat $2 | curl -s -F c=@- https://ptpb.pw/ | sed -e 7's/$/.png/' -;;
+	-i|--image)
+		cat $2 | curl -s -F c=@- https://ptpb.pw/?u=1 | cat - | sed -e 's/$/'.''$fext'';;
+	-sv|--screenshot-verbose)
+		maim -u -s | curl -s -F c=@- https://ptpb.pw/ | sed -e 7's/$/.png/' -;;
+	-s|--screenshot)
+		maim -u -s | curl -s -F c=@- https://ptpb.pw/?u=1 | awk '{print $0".png"}';;
+	-uv|--url-verbose)
+		curl -s -F c=@- https://ptpb.pw/u <<< $2;;
+	-u|--url)
+		curl -s -F c=@- https://ptpb.pw/u?u=1 <<< $2;;
+	-h|--help)
+		echo "Written by Jake Marin (jmarin217)"
+		echo "Options include:"
+		echo "	-f or --file : upload a file."
+		echo "	-s or --screenshot : upload a screenshot."
+		echo "	-u or --url : shorten a url."
+		echo "	Add a v to make it verbose."
+		echo "Syntax:"
+		echo "	pus -f <filename>"
+		echo "	pus -s"
+		echo "	pus -u <url>"
+		echo "	pus -*v"
+esac
+done
+if [[ $1 = "" ]]; then
+		echo "Written by Jake Marin (jmarin217)"
+		echo "Options include:"
+		echo "	-f or --file : upload a file."
+		echo "	-s or --screenshot : upload a screenshot."
+		echo "	-u or --url : shorten a url."
+		echo "	Add a v to make it verbose."
+		echo "Syntax:"
+		echo "	pus -f <filename>"
+		echo "	pus -s"
+		echo "	pus -u <url>"
+		echo "	pus -*v"	
+fi
